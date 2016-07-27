@@ -56,6 +56,7 @@
 }
 
 - (void)animationDidStart:(CAAnimation *)anim {
+    // 判断动画的类型
     if ([anim isEqual:[_layer animationForKey:@"animationStrokeEnd"]]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             CABasicAnimation *animationStart = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
@@ -72,6 +73,7 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     if ([anim isEqual:[_layer animationForKey:@"animationStrokeStart"]]) {
+        [_layer removeAllAnimations];
         [_layer removeFromSuperlayer];
         animating = NO;
     }
